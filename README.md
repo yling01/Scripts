@@ -35,7 +35,7 @@ The program is also capable of taking the following flags:
 
 ## writeBemeta.py
 ### Note:
-This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check manually afterwards.
+This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check the results manually afterwards.
 
 ### Program Description
 This program writes the parameter file (filename.dat) for BEMETA simulation.
