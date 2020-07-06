@@ -19,10 +19,12 @@ The two tested applications of this program are:
    
 The program is also capable of taking the following flags:
 
-            --cutoff: (float) cutoff for a trans peptide bond. The default value is 150, meaning that a peptide bond is considered as cis if the omega angle 
+            --cutoff: (float) cutoff for a trans peptide bond. The default value is 150, 
+                      meaning that a peptide bond is considered as cis if the omega angle 
                       has an absolute value greater than 150 degrees.
                       
-            --cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default is True, meaning that the structrue will be treated as a 
+            --cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default 
+                      is True, meaning that the structrue will be treated as a 
                       head-to-tail cyclic peptide when analyzing the structure.
      
 
