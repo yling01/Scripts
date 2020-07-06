@@ -67,5 +67,5 @@ The program is also capable of taking the following flags:
                         is True, meaning that the structrue will be treated as a 
                         head-to-tail cyclic peptide when analyzing the structure.
                         
-              --bemetaName: (string) name of the output file. Default is bemeta.dat
+              --bemetaName: (string) name of the output file. Default is bemeta.dat.
               
