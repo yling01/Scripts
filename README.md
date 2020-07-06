@@ -34,3 +34,20 @@ The program is also capable of taking the following flags:
      
 
 ## writeBemeta.py
+### Note:
+This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check manually afterwards.
+
+### Program Description
+This program writes the parameter file (filename.dat) for BEMETA simulation.
+To run the program, simply do:
+              
+              python writeBemeta.py [--pdb file.pdb | --gro file.gro]
+ 
+where file.pdb is the structure file in PDB format while file.gro is in GRO format. The program is only able to take one flag. An error will be thrown when both are declared.
+
+The program is also capable of taking the following flags:
+
+              --writeNDX: (bool, True or False) flag for writing out Phi and Psi angles to a 
+                          file in NDX format. Default is False.
+              
+              
