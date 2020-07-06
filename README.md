@@ -2,6 +2,11 @@
 This package currently includes two scripts for easier analysis/preparation before and after MD simulation. The usage of the two scripts are described below in detail.
 
 ## check_trajectory.py
+
+### Note:
+This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check manually afterwards.
+
+### Program Description
 This python program checks the validity of a structure or frames in a trajectory.
 The two tested applications of this program are:
 
@@ -19,13 +24,13 @@ The two tested applications of this program are:
    
 The program is also capable of taking the following flags:
 
-            --cutoff: (float) cutoff for a trans peptide bond. The default value is 150, 
-                      meaning that a peptide bond is considered as cis if the omega angle 
-                      has an absolute value greater than 150 degrees.
+              --cutoff: (float) cutoff for a trans peptide bond. The default value is 150, 
+                        meaning that a peptide bond is considered as cis if the omega angle 
+                        has an absolute value greater than 150 degrees.
                       
-            --cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default 
-                      is True, meaning that the structrue will be treated as a 
-                      head-to-tail cyclic peptide when analyzing the structure.
+              --cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default 
+                        is True, meaning that the structrue will be treated as a 
+                        head-to-tail cyclic peptide when analyzing the structure.
      
 
 ## writeBemeta.py
