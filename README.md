@@ -45,7 +45,7 @@ The program is also capable of taking the following flags:
                         head-to-tail cyclic peptide when analyzing the structure.
      
 
-## writeBemeta.py
+## write_bemeta.py
 ### Note:
 This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check the results manually afterwards.
 
