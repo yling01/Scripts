@@ -9,7 +9,11 @@ The two tested applications of this program are:
   
               python check_trajectory.py --seq SEQUENCE --gro file.gro
    
-  where SEQUENCE is the one letter amino acid sequence of the structure with upper 
-  caseletter indicating L-amino acid and lowercase letter indicating D-amino acid.
+   where SEQUENCE is the one letter amino acid sequence of the structure with upper caseletter indicating L-amino acid and lowercase letter indicating D-amino acid.
+  
+2. when checking the entire trajectory, simply do:
+              
+              python check_trajectory.py --seq SEQUENCE
+     
 
 ## writeBemeta.py
