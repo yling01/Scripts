@@ -14,6 +14,8 @@ The two tested applications of this program are:
 2. when checking the entire trajectory, simply do:
               
               python check_trajectory.py --seq SEQUENCE
+              
+   note that when using the script in this situation, make sure that there are only relevant gro files as one will be randomly chosen to be used. (An error will be thrown if the gro file does not match with the xtc file. 
      
 
 ## writeBemeta.py
