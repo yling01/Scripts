@@ -6,6 +6,6 @@ This python program checks the validity of a structure or frames in a trajectory
 The two tested applications of this program are
 * when checking the validity of a structure simply do
   
-  python check_trajectory.py --seq SEQUENCE --gro file.gro
+    python check_trajectory.py --seq SEQUENCE --gro file.gro
 
 ## writeBemeta.py
