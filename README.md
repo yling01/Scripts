@@ -9,13 +9,13 @@ The two tested applications of this program are:
   
               python check_trajectory.py --seq SEQUENCE --gro file.gro
    
-where SEQUENCE is the one letter amino acid sequence of the structure with upper 
-caseletter indicating L-amino acid and lowercase letter indicating D-amino acid.
+  where SEQUENCE is the one letter amino acid sequence of the structure with upper 
+  caseletter indicating L-amino acid and lowercase letter indicating D-amino acid.
         
-The program will check two things:
-        
-a. all omega angles for cis peptide bond. If a cis peptide bond is found, a message will be printed out.
+  The program will check two things:
+  
+  a. all omega angles for cis peptide bond. If a cis peptide bond is found, a message will be printed out.
             
-b. the chirality 
+  b. the chirality 
 
 ## writeBemeta.py
