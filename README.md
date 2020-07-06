@@ -69,3 +69,7 @@ The program is also capable of taking the following flags:
                         
               --bemetaName: (string) name of the output file. Default is bemeta.dat.
               
+## write_indices.py
+### Note:
+This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check the results manually afterwards.
+### Program Description
