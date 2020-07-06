@@ -49,5 +49,11 @@ The program is also capable of taking the following flags:
 
               --writeNDX: (bool, True or False) flag for writing out Phi and Psi angles to a 
                           file in NDX format. Default is False.
-              
+                          
+                          
+              --cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default 
+                        is True, meaning that the structrue will be treated as a 
+                        head-to-tail cyclic peptide when analyzing the structure.
+                        
+              --bemetaName: (string) name of the output file. Default is bemeta.dat
               
