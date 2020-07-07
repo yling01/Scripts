@@ -73,3 +73,17 @@ The program is also capable of taking the following flags:
 ### Note:
 This program has only been tested on head-to-tail cyclic peptide, if you are using program for linear peptide of stapled peptide, please check the results manually afterwards.
 ### Program Description
+This program writes the atom indices for Phi, Psi, or Omega angles into a file in NDX format.
+To get the NDX files for Phi/Psi and Omega angles by running this program, simply do:
+            
+            python write_indices.py [--pdb file.pdb | --gro file.gro] --Omega True --PhiPsi True
+            
+where file.pdb is the structure file in PDB format while file.gro is in GRO format. The program is only able to take one flag. An error will be thrown when both are declared.   
+
+The program is also capable of taking the following flags:
+
+            ----cyclic: (bool, True or False) flag for head-to-tail cyclic peptide. The default 
+                        is True, meaning that the structrue will be treated as a 
+                        head-to-tail cyclic peptide when analyzing the structure.
+
+Note that the Phi/Psi indices will be written into a single file.
