@@ -1,3 +1,4 @@
+import re
 import MDAnalysis as mda
 import os
 import sys
