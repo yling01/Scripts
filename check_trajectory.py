@@ -115,6 +115,8 @@ def calculate_phi_psi(u, start, stop, cyclic):
     return dihedral_angle
 
 if __name__ == "__main__":
+    print("=" * 80)
+    print("\nRunning check_trajectory.py......\n")
     print("\n!!!NOTE:Test Version Use With Causion!!!\n")
     print("\n!!!If multiple gro files are found, one will be chosen randomly!!!\n")
     parser = optparse.OptionParser()
@@ -142,10 +144,12 @@ if __name__ == "__main__":
         mask2 = pick_out_chirality(chirality, seq)
         if not mask1.flatten()[0]:
             print("\n!!!Cis Bond Found!!!\n")
+            raise ValueError
         else:
             print("\nNo Cis Bond Found\n")
         if not mask2.flatten()[0]:
             print("\n!!!Chirality Not the Same As Declared!!!\n")
+            raise ValueError
         else:
             print("\nChirality Is the Same As Declared\n")
 
@@ -168,3 +172,5 @@ if __name__ == "__main__":
             print("\n=> %s <=\n" % trajectory_file)
             print("%.1f%% of the frames have cis bond\n" % (len(np.argwhere(~mask1).flatten()) / num_frame * 100))
             print("%.1f%% of the frames have wrong chirality\n\n" % (len(np.argwhere(~mask2).flatten()) / num_frame * 100))
+    print("\nFinish Running check_trajectory.py......\n")
+    print("=" * 80)
