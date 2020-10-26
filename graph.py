@@ -186,7 +186,6 @@ if __name__ == "__main__":
     probabilityCutoff = float(options.probabilityCutoff)
 
     color = ['#e8173a', '#22dd34', '#260bf4', '#335cff', '#0a6902', '#0fa103', '#ae016c', '#fc019c','#be0a35', '#f76d8e']
-    assert len(seq) <= len(color)
 
     fig, plot_axes, text_axes = makeBlankFigure(2, len(seq))
 
@@ -213,12 +212,13 @@ if __name__ == "__main__":
 
         XTicksHotLoop = np.linspace(0, max(np.amax(rmsdHotLoop_mtx1), np.amax(rmsdHotLoop_mtx2)), binSizeHotLoop)
 
+        color_choice = color[index % len(color)]
         HotLoopX, HotLoopAllY1, HotLoopNoClashY1, s1_all_prob, s1_noC_prob = drawAllAndNoClash(plot_axes[index][0],
                                                                                                plot_axes[index][1],
                                                                                                rmsdHotLoop_mtx1,
                                                                                                clash_mtx1,
                                                                                                seq[index],
-                                                                                               color[index],
+                                                                                               color_choice,
                                                                                                XTicksHotLoop,
                                                                                                probabilityCutoff)
 
@@ -227,7 +227,7 @@ if __name__ == "__main__":
                                                                                                rmsdHotLoop_mtx2,
                                                                                                clash_mtx2,
                                                                                                "",
-                                                                                               color[index],
+                                                                                               color_choice,
                                                                                                XTicksHotLoop,
                                                                                                probabilityCutoff)
 
@@ -257,8 +257,8 @@ if __name__ == "__main__":
         if ymax < curr_max:
             ymax = curr_max
 
-        drawShadow(plot_axes[index][1], HotLoopX, HotLoopNoClashY1, HotLoopNoClashY2, color[index])
-        drawShadow(plot_axes[index][0], HotLoopX, HotLoopAllY1, HotLoopAllY2, color[index])
+        drawShadow(plot_axes[index][1], HotLoopX, HotLoopNoClashY1, HotLoopNoClashY2, color_choice)
+        drawShadow(plot_axes[index][0], HotLoopX, HotLoopAllY1, HotLoopAllY2, color_choice)
 
     ymax += 1.0
 
