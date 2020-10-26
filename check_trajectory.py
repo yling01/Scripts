@@ -3,18 +3,22 @@ import MDAnalysis as mda
 import os
 import sys
 import optparse
-
+import shutil
 import numpy as np
+import matplotlib.pyplot as plt
+
 from MDAnalysis.lib.distances import calc_dihedrals
 from MDAnalysis.analysis.dihedrals import Dihedral
-def get_trajectory_files(seq):
+from matplotlib.ticker import (MultipleLocator, FormatStrFormatter,
+                               AutoMinorLocator)
+
+def get_trajectory_files(seq, neutral):
     neutral_start_ind = len(seq) * 2
     neutral_end_ind = neutral_start_ind + 5
     neutral_range = [i for i in range(neutral_start_ind, neutral_end_ind)]
     all_files = os.listdir()
-    trajectory_files = [i for i in all_files if i[-3:] == "xtc" and int(re.search(r"\d{1,2}", i).group(0)) in neutral_range]
+    trajectory_files = [i for i in all_files if i[-3:] == "xtc" and (int(re.search(r"\d{1,2}", i).group(0)) in neutral_range or not neutral)]
     topology_files = [i for i in all_files if i[-3:] == "gro"]
-
     trajectory_files.sort()
     return topology_files, trajectory_files
 
@@ -118,6 +122,9 @@ def calculate_phi_psi(u, start, stop, cyclic):
     dihedral_angle = np.hstack((phi, psi))
     return dihedral_angle
 
+def get_parity(arg):
+    return True if arg[0].upper() == "T" else False
+
 if __name__ == "__main__":
     print("=" * 80)
     print("\nRunning check_trajectory.py......\n")
@@ -128,14 +135,12 @@ if __name__ == "__main__":
     parser.add_option('--gro', dest = 'gro', default = '')
     parser.add_option('--cutoff', dest = 'cutoff', default = '150')
     parser.add_option('--cyclic', dest = 'cyclic', default = 'True')
+    parser.add_option('--neutral', dest = 'neutral', default = 'True')
     (options, args) = parser.parse_args()
     seq = options.seq
     gro = options.gro
-
-    if options.cyclic.upper()[0] == "T":
-        cyclic = True
-    else:
-        cyclic = False
+    cyclic = get_parity(options.cyclic)
+    neutral = get_parity(options.neutral)
 
     cutoff = float(options.cutoff)
     while not seq:
@@ -158,17 +163,45 @@ if __name__ == "__main__":
             print("\nChirality Is the Same As Declared\n")
 
     else:
-        topology_files, trajectory_files = get_trajectory_files(seq)
+        topology_files, trajectory_files = get_trajectory_files(seq, neutral)
         if not trajectory_files:
             sys.exit("\nExiting...\nNo Trajectory Files Found...\n")
         if len(topology_files) > 1:
             print("\n!!!Multiple Topology Files (.gro) Found!!!\n")
             print("!!!A Random One Will Be Used!!!\n")
+
+        if os.path.exists("Trajectory_Check") and os.path.isdir("Trajectory_Check"):
+            shutil.rmtree("Trajectory_Check")
+
+        os.makedirs('Trajectory_Check')
+
         for trajectory_file in trajectory_files:
             print("\nWorking on %s\n" % trajectory_file)
             u = mda.Universe(topology_files[0], trajectory_file)
             num_frame = len(u.trajectory)
             omega_angles = calculate_omega(u, 0, num_frame, cyclic)
+
+            np.savetxt("Trajectory_Check/%s.txt" % trajectory_file.split(".")[0], omega_angles, fmt="%5.1f")
+
+            fig, ax = plt.subplots(figsize=(5,5), dpi=300)
+            for omega_angle in omega_angles.T:
+                ax.scatter(np.arange(len(omega_angle)), omega_angle, marker=".", c="black", s=10)
+
+            yticks = ax.get_yticks()
+            yticks[0], yticks[-1] = -180, 180
+            ax.set_yticks(yticks)
+            ax.yaxis.set_major_locator(MultipleLocator(60))
+
+            ax.set_ylabel("Angle [Degree]")
+            ax.set_xlabel("Step")
+
+            ax.set_ylim(bottom=-180, top=180)
+            ax.margins(x=0)
+
+            ax.set_title("Omega Angle vs. Step [%s]" % trajectory_file.split(".")[0])
+
+            fig.savefig("Trajectory_Check/%s.png" % trajectory_file.split(".")[0], bbox_inches='tight')
+
             chirality = calculate_chirality(u, 0, num_frame)
             mask1 = pick_out_trans(omega_angles, cutoff)
             mask2 = pick_out_chirality(chirality, seq)
